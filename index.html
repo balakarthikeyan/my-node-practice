@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>JavaScript Promise Demo</title>
+</head>
+<body>
+    <div id="container">
+        <div id="message"></div>
+        <button id="btnGet">Get Message</button>
+    </div>
+    <!-- <script src="./promises.js"></script> -->
+    <script>
+      function loadURL(url) {
+         return new Promise((resolve, reject) => {
+            console.log("Asynchronous request made.");
+            const requests = new XMLHttpRequest();
+            requests.onreadystatechange  = (e) => {
+                  if (this.readyState === 4) {
+                     if (this.status === 200) {
+                        resolve(this.response); // we got data here, so resolve the Promise
+                     } else {
+                        reject(Error(this.statusText)); // status is not 200 OK, so reject
+                     }
+                  }
+            };
+            requests.onerror = () => {
+                  reject(Error("Error fetching data.")); // error occurred, reject the  Promise
+            };
+            requests.open("GET", url, true);
+            requests.send(); // send the request
+         });
+      }
+
+      const btn = document.querySelector('#btnGet');
+      const msg = document.querySelector('#message');
+      btn.onclick = function () {
+         loadURL("https://api.icndb.com/jokes/random").then(
+            (data) => {
+                  console.log("Got data! Promise fulfilled.");
+                  msg.innerHTML = JSON.parse(data).value.joke;
+            },
+            (error) => {
+                  console.log("Promise rejected.");
+                  console.log(error.message);
+            }
+         );
+      }
+    </script>
+</body>
+</html>
