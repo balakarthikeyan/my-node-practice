@@ -15,11 +15,9 @@ promiseobj
 
 // promiseobj.then(
 //     function (result) {
-//         /* handle a successful result */
 //         console.log(result);
 //     },
 //     function (error) {
-//         /* handle an error */
 //         console.log(error);
 //     }
 // );
@@ -33,17 +31,13 @@ let promise2 = new Promise((resolve, reject) => {
 //returns if all resolves
 Promise.all([promise1, promise2]).then((fromRes) => {
     console.log(
-        "Result : " +
-            fromRes +
-            " Both the promises have been resolved successfully."
+        "Result : " + fromRes + " Both the promises have been resolved successfully."
     );
 });
 //returns if any one resolves
 Promise.race([promise1, promise2]).then((fromRes) => {
     console.log(
-        "Result : " +
-            fromRes +
-            " Both the promises have been resolved successfully."
+        "Result : " + fromRes + " Both the promises have been resolved successfully."
     );
 });
 
@@ -112,17 +106,9 @@ async function fun() {
 
     let result = await promise3; // wait until the promise resolves (*)
 
-    console.log(result); // "done!"
+    console.log(result);
 }
 fun();
-
-// async function fetchUsers(endpoint) {
-//     const res = await fetch(endpoint);
-//     let data = await res.json();
-//     data = data.map((user) => user.username);
-//     console.log(data);
-// }
-// fetchUsers("https://jsonplaceholder.typicode.com/users");
 
 // It will print out all unhandled Promise rejections.
 process.on('unhandledRejection', (err) => {
@@ -136,3 +122,45 @@ Promise.resolve(1)
   .then((x) => x + 5)
   .then((x) => console.log(x))
   .catch(console.error)
+
+const userData = () => {
+    return [
+            { "name": "Balakarthikeyan", "company" : "Unimoni", "exp" : "7+"},
+            { "name": "Ramesh", "company" : "Hexaware", "exp" : "6+"},
+            { "name": "Vivek", "company" : "Adlabs", "exp" : "8+"}
+        ];
+};
+
+const fetchData = new Promise(function(resolve, reject){
+    setTimeout(() =>{
+        var response = userData();
+        if(response.length > 0){
+            resolve(response);
+        } else {
+            reject("Error occurred");
+        }
+    }, 4000);
+});
+
+fetchData
+.then ((res)=>{
+    console.log(res);
+})
+.catch((err)=>{
+    console.log(err);
+});
+
+async function fetchData () {
+    try {
+        var response = await userData;
+        if(response.length > 0){
+            console.log(response);
+        } else {
+            throw new Error ("My Error occurred");
+        }
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+fetchData ();

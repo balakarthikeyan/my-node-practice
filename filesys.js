@@ -31,7 +31,8 @@ const   Parser = require('./parser');
 fs.readFile("./sources/tests.txt", function (err, logData) {
     if (err) throw err;
     // logData is a Buffer, convert to string.
-    var text = logData.toString();
-    results =  Parser.parser(text);
+    Parser.data = logData.toString();
+    Parser.parser();
+    results = Parser.sortByCount();
     console.log(results);
 });

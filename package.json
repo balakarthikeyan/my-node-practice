@@ -10,6 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "kue": "^0.11.6"
+    "axios": "^0.20.0",
+    "kue": "^0.11.6",
+    "node-fetch": "^2.6.1"
   }
 }

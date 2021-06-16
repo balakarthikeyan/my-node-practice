@@ -1,6 +1,12 @@
 var net = require('net');
 var server = net.createServer(function(connection) { 
-   console.log('client connected');
+   connection.on("listening", function () {
+      console.log("Server listening!");
+   });
+    
+   connection.on("connection", function (socket) {
+      console.log("Client connected!");
+   });
    
    connection.on('end', function() {
       console.log('client disconnected');

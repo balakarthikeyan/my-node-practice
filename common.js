@@ -1,3 +1,25 @@
+/* 
+var
+is function-scoped or globally-scoped.
+is not subject to the temporal dead zone.
+it creates a global property on window with the same name.
+is reassignable.
+is redeclarable.
+
+let
+is block scoped.
+is subject to the temporal dead zone.
+it does not create any global property on window.
+is reassignable.
+is not redeclarable.
+
+const
+is block scoped.
+is subject to the temporal dead zone.
+it does not create any global property on window.
+is not reassignable.
+is not redeclarable.
+*/
 const folks = [
     { name: "Bob", age: "32", occupation: "developer" },
     { name: "Bill", age: "17", occupation: "delinquent" },
